@@ -47,14 +47,14 @@ def get_volume()
 	
 	output = `vol get`.split
 	if output[1] == "off"
-		mute_string = "XX"
+		mute_string = "\u00D8"
 	else
-		mute_string = "OO"
+		mute_string = "\u266b"
 	end
 	
-	down_button = "\%{B\#700000}#{make_button('VV', {'A' => 'vol down'})}\%{B-}"
+	down_button = "\%{B\#700000}#{make_button("\u25bc", {'A' => 'vol down'})}\%{B-}"
 	
-	up_button = "\%{B\#700000}#{make_button('AA', {'A' => 'vol up'})}\%{B-}"
+	up_button = "\%{B\#700000}#{make_button("\u25b2", {'A' => 'vol up'})}\%{B-}"
 	
 	mute_button = "\%{B\#700000}#{make_button(mute_string, {'A' => 'vol flip'})}\%{B-}"
 	
@@ -72,7 +72,7 @@ def get_brightness()
 	
 	up_button = "%{B#000090}#{make_button("\u25b2", {'A' => 'bright up'})}\%{B-}"
 	
-	return "\%{B-}\%{F\#ffff00}\u263c#{down_button}#{scroll_button}#{up_button}\u263c"
+	return "\%{B-}\%{F\#ffff00}\u263c #{down_button}#{scroll_button}#{up_button} \u263c"
 end
 
 def get_date()
@@ -95,13 +95,11 @@ def get_self_destruct()
 	return '%{R}' + make_button('self-destruct', {'A' => 'pkill lemonbar'}) + basic_colors()
 end
 
-# puts get_battery()
-
 while true
 	puts "\%{l}#{get_date()}  #{get_battery()}  #{get_brightness()}  #{get_volume()}\%{r}#{get_wifi()}  #{get_self_destruct()}  #{get_power()}#{basic_colors()}"
 	
 	sleep(1)
 end
 
-# puts "\u25bc".unicode_normalize
+# puts "\u{1f507}".unicode_normalize
 
