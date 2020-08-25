@@ -53,11 +53,8 @@ def get_volume()
 	end
 	
 	down_button = "\%{B\#700000}#{make_button("\u25bc", {'A' => 'vol down'})}\%{B-}"
-	
 	up_button = "\%{B\#700000}#{make_button("\u25b2", {'A' => 'vol up'})}\%{B-}"
-	
 	mute_button = "\%{B\#700000}#{make_button(mute_string, {'A' => 'vol flip'})}\%{B-}"
-	
 	
 	return "\%{B-}\%{F#bbbbff}Volume: #{down_button} #{output[0]} #{up_button} #{mute_button}#{basic_colors()}"
 end
@@ -76,8 +73,10 @@ def get_brightness()
 end
 
 def get_date()
-	output = `date`.chomp
-	return basic_colors() + output
+	output = `date`.chomp.split
+	clock = output[4..6].join(' ')
+	date = output[0..3].join(' ')
+	return "#{basic_colors}#{clock} #{date}"
 end
 
 def get_power()

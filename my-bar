@@ -1,0 +1,3 @@
+#! /bin/sh
+
+ruby .scripts/bar-script.rb | lemonbar -pb -f "9x18" | bash
