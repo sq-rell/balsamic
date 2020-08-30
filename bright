@@ -1,0 +1,30 @@
+#!/bin/sh
+
+cd /home/denalir/.scripts
+
+if [ "$1" = "up" ]
+then
+	cur=`bright get`
+	if (( cur < 80000 ))
+	then
+		(( cur = cur + 1000 ))
+		bright $cur
+	fi
+elif [ "$1" = "down" ]
+then
+	cur=`bright get`
+	if (( cur > 4000 ))
+	then
+		(( cur = cur - 1000 ))
+		bright $cur
+	fi
+elif [ "$1" = "get" ]
+then
+	cat /sys/class/backlight/intel_backlight/brightness
+else
+	./aux/bright.out $1
+fi
+
+
+
+

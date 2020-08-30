@@ -1,0 +1,6 @@
+#!/bin/sh
+
+xrandr --output eDP-1 --brightness $1
+
+# if you need to, right now your best bet is /sys/class/backlight/intel_backlight/brightness
+# But I really need a better way to do this

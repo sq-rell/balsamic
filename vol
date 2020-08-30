@@ -1,0 +1,3 @@
+#! /bin/sh
+
+ruby ~/.scripts/aux/vol.rb $1

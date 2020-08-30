@@ -1,0 +1,11 @@
+#!/bin/sh
+
+
+x=`cat /sys/class/backlight/intel_backlight/brightness`
+
+while ((x > 7000))
+do
+	x=$((x - 500))
+	bright $x
+	sleep 2
+done
