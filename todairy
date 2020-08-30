@@ -1,0 +1,21 @@
+#! /bin/sh
+
+diarydir=/home/denalir/diary
+
+day=`date --date=$1 +%d`
+month=`date --date=$1 +%m`
+year=`date --date=$1 +%Y`
+
+if ! ls $diarydir/$year
+then
+	mkdir $diarydir/$year
+fi
+
+if ! ls -d $diarydir/$year/$month*
+then
+	monthfolder=$diarydir/$year/$month`date +%B`
+	mkdir $monthfolder
+else
+	monthfolder=`ls -d $diarydir/$year/$month*`
+fi
+kate $monthfolder/$year-$month-$day.txt

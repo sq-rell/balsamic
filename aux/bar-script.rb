@@ -73,32 +73,39 @@ def get_brightness()
 end
 
 def get_date()
-	output = `date`.chomp.split
-	clock = output[4..6].join(' ')
-	date = output[0..3].join(' ')
-	return "#{basic_colors}#{clock} #{date}"
+	output = `date +"%R:%S %a %d %b %Y"`.chomp
+	return "#{basic_colors}#{output}"
 end
 
 def get_power()
-	suspend_button = make_button('suspend', {'A' => 'systemctl suspend'})
+	power_button = make_button('Suspend', {'A' => 'i3exit suspend'})
 	
-	return basic_colors() + '%{R}' + suspend_button
+	return basic_colors() + '%{R}' + power_button
 end
 
 def get_wifi()
 	output = `nmcli device`.split("\n")[1].split
-	return basic_colors() + 'Wifi: '+ output[2] + ', ' + output[3]
+	return 'Wifi: '+ output[2] + ', ' + output[3]
 end
 
 def get_self_destruct()
-	return '%{R}' + make_button('self-destruct', {'A' => 'pkill lemonbar'}) + basic_colors()
+#	return '%{R}' + make_button('self-destruct', {'A' => "pkill lemonbar"}) + basic_colors()
+	this_pid = `cat /home/denalir/.scripts/aux/bar_pids/main_pid`.chomp
+	return '%{R}' + make_button('self-destruct', {'A' => "echo again; kill #{this_pid}", 'A3' => "echo stop; kill #{this_pid}"}) + basic_colors()
 end
 
+def get_diary()
+	
+	output = "diary"
+	button_output = make_button(output, {'A' => "todairy today", 'A3' => "todairy yesterday"})
+	return "\%{R}#{button_output}#{basic_colors()}"
+end
+
+
 while true
-	puts "\%{l}#{get_date()}  #{get_battery()}  #{get_brightness()}  #{get_volume()}\%{r}#{get_wifi()}  #{get_self_destruct()}  #{get_power()}#{basic_colors()}"
+	puts "\%{l}#{get_date()}  #{get_battery()}  #{get_brightness()}  #{get_volume()}\%{r}#{get_diary()} #{get_wifi()}  #{get_self_destruct()}  #{get_power()}#{basic_colors()}"
 	
 	sleep(1)
 end
 
-# puts "\u{1f507}".unicode_normalize
 

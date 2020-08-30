@@ -1,3 +1,22 @@
 #! /bin/sh
 
-ruby .scripts/bar-script.rb | lemonbar -pb -f "9x18" | bash
+script_loc=/home/denalir/.scripts/aux
+
+pid_loc=/home/denalir/.scripts/aux/bar_pids/main_pid
+
+
+babyVar="stop"
+
+if ! ls $pid_loc &> /dev/null
+then
+	#ruby .scripts/bar-script.rb | lemonbar -pb -f "9x18" | bash
+	babyVar=`(ruby $script_loc/bar-script.rb & echo $! > $pid_loc ) | lemonbar -b -f "9x18" -a 14 | bash`
+	rm $pid_loc
+fi
+
+if ! [ "$babyVar" = "again" ]
+then
+	exit
+fi
+
+exec my-bar
