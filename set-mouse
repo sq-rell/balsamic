@@ -1,0 +1,6 @@
+#!/bin/sh
+
+xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "Device Accel Profile" 3
+xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "Device Accel Velocity Scaling" 60
+xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "Synaptics Scrolling Distance" -30 -30
+xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "Synaptics Tap Action" 0 0 0 0 1 0 0

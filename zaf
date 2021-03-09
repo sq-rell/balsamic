@@ -1,0 +1,11 @@
+#!/bin/sh
+
+x=`ls *.pdf | wc -l`
+if [ "$x" = 1 ]
+then
+	y=`ls *.pdf`
+	zathura $y &
+else
+	ls *.pdf
+fi
+

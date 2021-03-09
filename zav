@@ -1,0 +1,13 @@
+#!/bin/bash
+
+x=`pwd`
+x=`basename $x`
+
+if ! ls $x.tex
+then
+	cp /home/denalir/.scripts/aux/ext.tex $x.tex
+fi
+pdflatex $x.tex
+
+zathura $x.pdf &
+vim $x.tex

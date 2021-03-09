@@ -1,0 +1,11 @@
+!#/bin/bash
+
+x=`ls *.tex`
+y=`echo $x | wc -l`
+if [ "$y" != 1 ]
+then
+	ls *.tex
+	exit poop
+fi
+
+vim $x
