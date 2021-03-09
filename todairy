@@ -1,5 +1,12 @@
 #! /bin/sh
 
+date --date=$1
+
+if (test $? -ne 0)
+then
+	exit
+fi
+
 diarydir=/home/denalir/diary
 
 day=`date --date=$1 +%d`
@@ -18,4 +25,5 @@ then
 else
 	monthfolder=`ls -d $diarydir/$year/$month*`
 fi
-kate $monthfolder/$year-$month-$day.txt
+
+emacs $monthfolder/$year-$month-$day.txt
